@@ -1,0 +1,34 @@
+
+{% if peopleArgInformation|length > 0 %}
+    {% for person in peopleArgInformation %}
+        <form action="/peopleinformaprofile/{{person[0]}}" method="POST">
+            <label for="fullname">Full Name</label>
+            <input type="text" name="fullname" value="{{person[1]}}"/>
+            <label for="cellphone">Cellphone</label>
+            <input type="text" name="cellphone" value="{{person[2]}}"/>
+            <label for="email">Email</label>
+            <input type="email" name="email" value="{{person[3]}}"/>
+            <label for="adress">Adress</label>
+            <input type="text" name="adress" value="{{person[4]}}"/>
+            <label for="age">Age</label>
+            <input type="text" name="age" value="{{person[5]}}"/>
+            <input type="text" name="idperson" value="{{current_user.id}}" hidden/>
+            <button type="submit">Update</button>
+        </form> 
+    {% endfor %}
+{% else %}
+    <form action="/peopleinformaprofile" method="POST">
+        <label for="fullname">Full Name</label>
+        <input type="text" name="fullname"/>
+        <label for="cellphone">Cellphone</label>
+        <input type="number" name="cellphone"/>
+        <label for="email">Email</label>
+        <input type="email" name="email"/>
+        <label for="adress">Adress</label>
+        <input type="text" name="adress"/>
+        <label for="age">Age</label>
+        <input type="number" name="age"/>
+        <input type="text" name="idperson" value={{current_user.id}} hidden/>
+        <button type="submit">Save</button>
+    </form>
+{% endif %}

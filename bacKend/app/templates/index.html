@@ -1,0 +1,33 @@
+hello,
+<!-- {% if current_user.is_authenticated %} -->
+{{current_user.username}}
+{% if current_user.role.name == 'Administrator' %}
+    <nav>
+        <li><a href="/peopleinformaprofile">People profile</a></li>
+        <li><a href="/people">People</a></li>
+        <li><a href="/adddetail">AddDetail</a></li>
+        <li><a href="/historychurch">HistoryDetails</a></li>
+        <li><a href="/balance">Balance</a></li>
+        <li><a href="/churchbalance">ChurchBalance</a></li>
+        <li><a href="/userslogin">Users</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </nav>
+{% elif current_user.role.name == 'Moderator' %}
+    <h1>Moderator</h1>
+    <ul>
+        <li><a href="/userslogin">Users</a></li>
+        <li><a href="/peopleinformaprofile">People profile</a></li>
+        <li><a href="/people">People</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>
+{% elif current_user.role.name == 'User' %}
+    <h1>User</h1>
+    <ul>
+        <li><a href="/peopleinformaprofile">People profile</a></li>
+        <li><a href="/churchbalanceperson">People balance</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    </ul>      
+{% endif %}
+<!-- {% else %}
+    Stranger -->
+<!-- {% endif %} -->

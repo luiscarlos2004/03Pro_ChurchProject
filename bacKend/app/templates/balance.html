@@ -1,0 +1,23 @@
+{% block details %}
+    <h2>Table Balance</h2>
+    <table border="10px">
+        <tr>
+            <th>Full Name</th>
+            <th>Monto</th>
+        </tr>
+        {% for person in balancePeople %}
+        <tr>
+            <td>{{person[1]}}</td>
+            <td>{{person[2]}}</td>
+            <td><a href="/updatebalance/{{person[0]}}">Update</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <form>
+        <label>Year</label>
+        <input for="year" name="year"/>
+    </form>
+    <form action="/convert" method="POST">
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}

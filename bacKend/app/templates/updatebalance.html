@@ -1,0 +1,19 @@
+{% block details %}
+
+    {% for person in personReady%}
+        <form action="/updatebalanceinformation" method="POST">
+            <input type="text" name="person_id" value="{{person[0]}}" hidden/>
+            <label for="reason">Action</label>
+            <select name="reason">
+                <option>Add</option>
+                <option>Subtract</option>
+            </select>
+            <label for="monto">Monto currenty</label>
+            <input type="number" name="monto" value="{{person[1]}}" disabled/>
+            <label for="newmonto">Monto</label>
+            <input type="number" name="newmonto"/>
+            <button type="submit">Submit</button>
+        </form>
+    {% endfor %}
+    
+{% endblock %}

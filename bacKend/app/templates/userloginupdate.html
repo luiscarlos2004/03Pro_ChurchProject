@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+</head>
+<body>
+    <h1>Signup</h1>
+    {% for person in userpeopleinformationfinal %}
+        <form action="/updateuser/{{person[0]}}" method="POST">
+            <label for="email">Email</label>
+            <input type="email" name="email" value="{{person[1]}}"/>
+            <label for="password">Password</label>
+            <input type="text" name="password"/>
+            <input type="submit" name="submit">
+        </form>
+    {% endfor %}
+</body>
+</html>

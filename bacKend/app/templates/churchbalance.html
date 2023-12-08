@@ -1,0 +1,19 @@
+<h2>Church Balance</h2>
+<table border="10px">
+    <tr>
+        <th>Ofrenda</th>
+        <th>Diezmo</th>
+        <th>Donation</th>
+        <th>Gasto</th>
+        <th>Total</th>
+    </tr>
+    {% for balance in churchbalance%}
+        <tr>
+            <td>{{balance[0]}}</td>
+            <td>{{balance[1]}}</td>
+            <td>{{balance[2]}}</td>
+            <td>{{balance[3]}}</td>
+            <td>{{balance[4]}}</td>
+        </tr>
+    {% endfor %}
+</table>

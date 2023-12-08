@@ -1,0 +1,49 @@
+{% block people%}
+
+    {% for person in person%}
+        <form action="/updateperson/{{person[0]}}" method="POST">
+            <label for="fullname">Full Name</label>
+            <input type="text" name="fullname" value="{{person[1]}}"/>
+            <label for="cellphone">Cellphone</label>
+            <input type="number" name="cellphone" value="{{person[2]}}"/>
+            <label for="email">Email</label>
+            <input type="text" name="email" value="{{person[3]}}"/>
+            <label for="adress">Adress</label>
+            <input type="text" name="adress" value="{{person[4]}}"/>
+            <label for="age">Age</label>
+            <input type="number" name="age" value="{{person[5]}}"/>
+            {% if current_user.role.name == 'Administrator' %}
+                
+                <select type="select" name="statusperson">
+                    {% if person[6] == True %}
+                        <option selected>Active</option>
+                        <option>Desactivate</option>
+                    {% else %}
+                        <option>Active</option>
+                        <option selected>Desactivate</option>
+                        {% endif %}
+                </select>
+
+                <label for="role">Role</label>
+                <select type="select" name="role">
+                    {% if person[8] == 'Administrator' %}
+                        <option value="3" selected>Administrator</option>
+                        <option value="2">Moderator</option>
+                        <option value="1">User</option>
+                    {% elif person[8] == 'Moderator' %}
+                        <option value="3">Administrator</option>
+                        <option value="2" selected>Moderator</option>
+                        <option value="1">User</option>
+                    {% else %}
+                        <option value="3">Administrator</option>
+                        <option value="2">Moderator</option>
+                        <option value="1" selected>User</option>
+                    {% endif %}
+                </select>
+            {% endif %}
+            <input type="text" name="profile_id" value="{{person[7]}}" hidden/>
+            <button type="submit">Save</button>
+        </form>
+    {% endfor%}
+    
+{% endblock%}

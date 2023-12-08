@@ -1,0 +1,46 @@
+<h2>Table Hystory</h2>
+
+<form method="POST" action="/historychurch">
+    <label for="datepeople">Date</label>
+    <input type="date" name="datepeople">
+    <input type="number" name="datepeopleyear">
+    <input type="submit" value="submit">
+</form>
+<table border="10px">
+    <tr>
+        <th>id</th>
+        <th>id_person</th>
+        <th>FulL Name</th>
+        <th>Detail</th>
+        <th>Monto</th>
+        <th>DateDetail</th>
+        <th>Delete</th>
+        <th>Update</th>
+    </tr>
+    {% for historyperson in historychurch%}
+    <tr>
+        <td>{{historyperson[0]}}</td>
+        <td>{{historyperson[1]}}</td>
+        <td>{{historyperson[2]}}</td>
+        <td>{{historyperson[3]}}</td>
+        <td>{{historyperson[4]}}</td>
+        <td>{{historyperson[5]}}</td>
+        <td><a href="/historypersondelete/{{historyperson[0]}}">Delete</a></td>
+        <td><a href="/historypersonupdate/{{historyperson[0]}}">Update</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+<table border="10px">
+    <tr>
+        <th>FulL Name</th>
+        <th>Monto</th>
+    </tr>
+    {% for i in historychurch2%}
+    <tr>
+        
+        <td>{{i[0]}}</td>
+        <td>{{i[1]}}</td>
+    </tr>
+    {% endfor%}
+</table>

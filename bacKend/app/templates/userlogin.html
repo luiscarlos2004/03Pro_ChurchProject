@@ -1,0 +1,17 @@
+<table border="1px">
+    <tr>
+        <th>Email</th>
+        <th>Username</th>
+        <!-- <th>Password</th> -->
+        <th>Confirmed</th>
+    </tr>
+    {% for personinfo in userpeopleinformationfinal%}
+        <tr>
+            <td>{{personinfo[1]}}</td>
+            <td>{{personinfo[2]}}</td>
+            <!-- <td></td> -->
+            <td>{{personinfo[4]}}</td>
+            <td><a href="userlogin/{{personinfo[0]}}">Update</a></td>
+        </tr>
+    {% endfor %}
+</table>

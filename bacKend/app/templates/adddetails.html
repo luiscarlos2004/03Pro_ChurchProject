@@ -1,0 +1,22 @@
+{% block details %}
+    <h1>Add details</h1>
+    <form class="form" action='/adddetail' method="POST">
+        <label for="fullname">Full Name</label>
+        <select type="select" name="fullname">
+            {% for namepersona in namespeople %}
+                <option>{{namepersona[1]}} <p>{{namepersona[0]}}</p></option>
+            {% endfor %}
+        </select>
+        <select type="select" name="tipo">
+            <option>Ofrenda</option>
+            <option>Diezmo</option>
+            <option>Donation</option>
+            <option>Gasto</option>
+        </select>
+        <label for="total">Monto</label>
+        <input type='number' name="total">Monto</input>
+        <label for="dateregistered">Date</label>
+        <input type="date" name="dateregistered"/>
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}
