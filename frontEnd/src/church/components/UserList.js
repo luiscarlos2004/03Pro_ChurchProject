@@ -2,10 +2,7 @@ import React from "react";
 import { getListUsers } from "../../helpers/getListUsers";
 
 export const UserListsomething = (publisher) => {
-    // const users = getListUsers( publisher );
-    
-    // console.log(publisher.children)
-    const args = {
+    const argspeople = {
         "id":publisher.children[0],
         "email":publisher.children[3]
     }
@@ -13,8 +10,8 @@ export const UserListsomething = (publisher) => {
         <>
             <h1>Something</h1>
             <ul>
-                <li>{args["id"]}</li>
-                <li>{args["email"]}</li>
+                <li>{argspeople["id"]}</li>
+                <li>{argspeople["email"]}</li>
             </ul>
         </>
         
