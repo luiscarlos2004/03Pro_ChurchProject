@@ -48,12 +48,15 @@ export const LoginValidation = () => {
     return(
         <>
 
-            <form onSubmit={handleSubmit}>
-
-                <label htmlFor="username">Username</label>
-                <input onChange={(e)=>handleChangeUsername(e,"username")} type="text" name="username" id="username"/>
-                <label htmlFor="password">Password</label>
-                <input onChange={(e)=>handleChangeUsername(e,"password")} type="password" name="password" id="password"/>
+            <form onSubmit={handleSubmit} className="login">
+                <p>
+                    <label htmlFor="username">Username</label>
+                    <input onChange={(e)=>handleChangeUsername(e,"username")} type="text" name="username" id="username"/>
+                </p>
+                <p>
+                    <label htmlFor="password">Password</label>
+                    <input onChange={(e)=>handleChangeUsername(e,"password")} type="password" name="password" id="password"/>
+                </p>
                 <button type="submit">Submit</button>
             
             </form>

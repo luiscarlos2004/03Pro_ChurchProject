@@ -1,0 +1,14 @@
+.loginmain{
+    margin-top: 17%;
+}
+.logintitle{
+    text-align: center;
+    font-size: 40px;
+}
+/* .login{
+    display: flex;
+} */
+.login input,
+.login label{
+    width: 100%;
+}
