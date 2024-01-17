@@ -8,7 +8,6 @@ export const LoginPage = () => {
         <>
             <h1>Login</h1>
             <LoginValidation/>
-            {/* <button onClick={}>Sign up</button> */}
         </>
     )
 }

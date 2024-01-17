@@ -24,7 +24,18 @@ export const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        if(!username){
+            alert('username required');
+            return
+        }
+        if(!password){
+            alert('Password required');
+            return
+        }
+        if(!fullname){
+            alert('Username required');
+            return
+        }
         try{
             const data = await axios.post(`${baseUrl}/auth/register`,{username:username,password:password,fullname:fullname});
             console.log(data)

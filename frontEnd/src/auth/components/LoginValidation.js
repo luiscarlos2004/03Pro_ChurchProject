@@ -12,6 +12,7 @@ const baseUrl = "http://127.0.0.1:5000";
 
 export const LoginValidation = () => {
     const navigate = useNavigate();
+
     const[username, setUsername] = useState();
     const[password, setPassword] = useState();
 
@@ -27,16 +28,26 @@ export const LoginValidation = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
+        if(!username){
+            alert('username required');
+            return
+        }
+        if(!password){
+            alert('Password required');
+            return
+        }
         try{
             const data = await axios.post(`${baseUrl}/auth/login`, { username:username, password:password });
+            
             if(data.data === "True"){
 
-                login("Luis",types.login);
+                login(username.username,types.login);
                 navigate('/home');
+
             }else{
 
-                login("",types.logout);
+                login(username.username,types.logout);
                 navigate('/signup');
             }
 
@@ -44,6 +55,10 @@ export const LoginValidation = () => {
             console.error(err.message)
         }
     }
+
+    // const validate = () => {
+        
+    // }
 
     return(
         <>
