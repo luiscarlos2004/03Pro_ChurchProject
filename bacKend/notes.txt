@@ -1,0 +1,4 @@
+if want to fix the MySql error terminal must have to use
+export DYLD_LIBRARY_PATH=/usr/local/mysql/lib/
+or this could work
+export DYLD_LIBRARY_PATH=/usr/local/mysql/lib:$DYLD_LIBRARY_PATH
