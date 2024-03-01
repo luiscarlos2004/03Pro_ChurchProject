@@ -3,6 +3,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bootstrap import Bootstrap
+from flask_mysqldb import MySQL
+# import MySQLdb.cursors
+
 # from flask_mail import Mail
 import os
 # from ..app.email import send_email
@@ -11,6 +14,7 @@ from config.config import config
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
+mysql = MySQL()
 # mail = Mail()
 
 
@@ -30,7 +34,17 @@ def create_app(config_name):
     app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 
     app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
+    
+
+   
+    # app.config['MYSQL_HOST'] = 'localhost'
+    # app.config['MYSQL_USER'] = 'root'
+    # app.config['MYSQL_PASSWORD'] = 'luiscarlos2004'
+    # app.config['MYSQL_DB'] = 'projectChurch'
+    
+    
     db.init_app(app)
+    mysql.init_app(app)
     # mail = Mail(app)
     
     #Routes of blueprint

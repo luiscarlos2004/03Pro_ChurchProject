@@ -28,6 +28,11 @@ class Config:
     MAIL_USERNAME = 'luiscarlosvaldivieso3@gmail.com'
     MAIL_PASSWORD = 'uzou scpw siem cjph'
 
+    MYSQL_HOST = 'localhost'
+    MYSQL_USER = 'root'
+    MYSQL_PASSWORD = 'luiscarlos2004'
+    MYSQL_DB = 'projectChurch'
+
     #-----/This not required a class intance creation/-----
    
     @staticmethod
