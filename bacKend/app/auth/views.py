@@ -1,26 +1,8 @@
-from flask import redirect, url_for, flash, request, jsonify
-from flask_login import logout_user, login_required
+from flask import request
 from . import auth
-from ..models import User,db,People
 from app import mysql
 from werkzeug.security import generate_password_hash, check_password_hash
 
-
-
-# @auth.route('/testdatabaseadd', methods=['GET'])
-# def testDatabase():
-#     cursor = mysql.connect.cursor()
-#     res = cursor.execute('''SELECT * FROM test''')
-#     cursor.close()
-#     return jsonify(res)
-
-# @auth.route('/testdatabaseadd', methods=['POST'])
-# def testdatabaseadd():
-#     cursor = mysql.connect.cursor()
-#     cursor.execute('''INSERT INTO test(name) VALUES(%s)''', ['carlos'])
-#     cursor.connection.commit()
-#     cursor.close()
-#     return 'yea'
 
 @auth.route('/registercompany', methods=['POST'])
 def registercompany():
@@ -69,19 +51,14 @@ def registerperson():
         username = request.json['username']
         password = generate_password_hash(request.json['password'])
         print(password)
-        # @password.setter
-        # def password(self, password):
-        #     self.password_hash = generate_password_hash(password)
-
-        # role = request.json['role']
+    
         role = '15'
         
         try:
 
             conn = mysql.connect.cursor()
             conn.execute('''INSERT INTO usersinformation(type_document,document,first_name,middle_name,first_last_name,second_last_name,address,cellphone,email,company_id) VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)''', (type_document,document,first_name,middle_name,first_last_name,second_last_name,address,cellphone,email,company_id))
-            # conn.execute('''INSERT INTO user_login(username,email,password,role,document) VALUES(%s,%s,%s,%s,%s)''',(username,email,password,role,document))
-            # conn.connection.commit()
+            conn.connection.commit()
             conn.execute('''INSERT INTO user_login(username,email,password,role,document) VALUES(%s,%s,%s,%s,%s)''',(username,email,password,role,document))
             conn.connection.commit()
             conn.close()
@@ -98,9 +75,6 @@ def registerperson():
 
         return 'Something went wrong with the input values'
 
-@auth.route('/registeruser', methods=['GET','POST'])
-def registeruser():
-    pass
 
 @auth.route('/login', methods=['GET','POST'])
 def login():
@@ -108,49 +82,37 @@ def login():
     username = request.json['username']
     password = request.json['password']
 
-    email = username
-    password = password
+    print(username)
+    print(password)
 
     try:
+        conn = mysql.connect.cursor()
+
+        if("@" in username):
             
-        user = User.query.filter_by(email=email).first()
-        active = False
+            email = username
+            conn.execute("SELECT * FROM user_login WHERE email = %s", (email,))
+        
+        else:
 
-        if user != None:
-            active = True
+            conn.execute("SELECT * FROM user_login WHERE username = %s", (username,))
+        
+        value = [{"idul": a[0],"username":a[1],"email":a[2],"password":a[3],"role":a[4],"document":a[5]} for a in conn]
 
-        if user is not None and user.verify_password(password) and active is not False:
-            return 'True';
-        return 'False';
-    except:
-        print("Something wrong with the login")
+        conn.close()
+
+
+        if len(value) > 0 and check_password_hash(value[0]["password"],password):
+            return 'True'
+        else:
+            return 'Password or username is incorrect'
+        
+    except Exception as e:
+
+        print(e)
+        return "Something wrong with the login"
 
 @auth.route('/logout')
-@login_required
 def logout():
-    logout_user()
-    flash('You have been logged out.')
-    return redirect(url_for('main.index'))
+    return 'User Logout'
 
-
-
-@auth.route('/register', methods=['GET','POST'])
-def register():
-    username = request.json['username']
-    password = request.json['password']
-    fullname = request.json['fullname']
-    user = User(email=username,
-                username=username,
-                password=password)
-    email= username
-    db.session.add(user)
-
-    userinformation = db.session.query(User.id).filter_by(email=email)
-    idperson = [{"idperson":person[0]} for person in userinformation]
-    profile_id = idperson[0]["idperson"]
-    # print(profile_id)
-    userpeople = People(fullname=fullname, email=email, profile_id=profile_id)
-    db.session.add(userpeople)
-    db.session.commit()
-
-    return "Saved"

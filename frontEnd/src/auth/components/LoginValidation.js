@@ -39,16 +39,18 @@ export const LoginValidation = () => {
         }
         try{
             const data = await axios.post(`${baseUrl}/auth/login`, { username:username, password:password });
-            
+            console.log(data)
             if(data.data === "True"){
 
                 login(username.username,types.login);
                 navigate('/home');
+                // alert('validated')
 
             }else{
 
                 login(username.username,types.logout);
                 navigate('/signup');
+                // alert('validate')
             }
 
         }catch(err){

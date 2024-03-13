@@ -1,5 +1,5 @@
 from itsdangerous.url_safe import URLSafeTimedSerializer as TimedSerializer 
-# from itsdangerous import URLSafeTimedSerializer as Serializer
+from itsdangerous import URLSafeTimedSerializer as Serializer
 from . import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, AnonymousUserMixin

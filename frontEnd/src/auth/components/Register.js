@@ -9,6 +9,16 @@ export const Register = () => {
     const[username,setUsername] = useState();
     const[password,setPassword] = useState();
     const[fullname, setFullname] = useState();
+    const[type_document, setType_document] = useState();
+    const[document, setDocument] = useState();
+    const[first_name, setFirst_name] = useState();
+    const[middle_name, setMiddle_name] = useState();
+    const[first_last_name, setFirst_last_name] = useState();
+    const[second_last_name, setSecond_last_name] = useState();
+    const[address, setAddress] = useState();
+    const[cellphone, setCellphone] = useState();
+    const[email,setEmail] = useState();
+    const[company_id, setCompany_id] = useState();
 
     const handleChangeUsername = (e,field) => {
         
