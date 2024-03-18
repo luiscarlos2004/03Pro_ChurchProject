@@ -11,11 +11,16 @@ import os
 # from ..app.email import send_email
 #-----/Imports app configuration/-----
 from config.config import config
+from datetime import timedelta
+
+#-----//Token validation//-----
+from flask_jwt_extended import create_access_token,get_jwt,get_jwt_identity,unset_access_cookies,jwt_required,JWTManager
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 mysql = MySQL()
 # mail = Mail()
+jwt = JWTManager()
 
 
 #-----/This is so important for the login/-----
@@ -34,8 +39,10 @@ def create_app(config_name):
     app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
 
     app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
-    
+    app.config["JWT_SECRET_KEY"] = os.environ.get('JWT_KEY')
+    app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(hours=1)
 
+    jwt.init_app(app)
    
     # app.config['MYSQL_HOST'] = 'localhost'
     # app.config['MYSQL_USER'] = 'root'

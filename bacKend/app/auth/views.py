@@ -2,10 +2,10 @@ from flask import request
 from . import auth
 from app import mysql
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_jwt_extended import create_access_token
 
-
-@auth.route('/registercompany', methods=['POST'])
-def registercompany():
+@auth.route('/token', methods=["POST"])
+def create_token():
 
     try:
 
@@ -82,14 +82,14 @@ def login():
     username = request.json['username']
     password = request.json['password']
 
-    print(username)
-    print(password)
+    
 
     try:
         conn = mysql.connect.cursor()
 
         if("@" in username):
             
+            # print(response)
             email = username
             conn.execute("SELECT * FROM user_login WHERE email = %s", (email,))
         
@@ -103,6 +103,9 @@ def login():
 
 
         if len(value) > 0 and check_password_hash(value[0]["password"],password):
+            access_token = create_access_token(identity=value[0]["idul"])
+            print(access_token)
+            # response = {"access_token":access_token}
             return 'True'
         else:
             return 'Password or username is incorrect'

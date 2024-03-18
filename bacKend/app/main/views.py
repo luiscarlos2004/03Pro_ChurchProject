@@ -21,7 +21,7 @@ locale.setlocale(locale.LC_MONETARY, 'en_US.US-ASCII')
 #-----Forms-----
 
 #-----Routes-----
-
+from flask_jwt_extended import jwt_required
 
 
 # @main.route('/admin')
@@ -37,8 +37,9 @@ locale.setlocale(locale.LC_MONETARY, 'en_US.US-ASCII')
 #     return "For comment moderators!"
 
 @main.route('/dashboard', methods=['Get','POST'])
+@jwt_required()
 def index():
-    return redirect('/dashboard')
+    return 'test'
 
 # @main.route('/home')
 # @login_required
